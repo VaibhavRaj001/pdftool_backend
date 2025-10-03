@@ -86,7 +86,7 @@ app.post("/compress", upload.single("file"), async (req, res) => {
     const outPath = path.join(tmpDir, `output-${Date.now()}.pdf`);
 
     await fs.writeFile(inPath, req.file.buffer);
-    const gsCmd = `gswin64c -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${outPath}" "${inPath}"`;
+    const gsCmd = `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${outPath}" "${inPath}"`;
 
 
     exec(gsCmd, async (err) => {
@@ -164,4 +164,5 @@ app.get("/ping", (req, res) => {
 app.listen(PORT, () =>
   console.log(`PDF MVP API running on http://localhost:${PORT}`)
 );
+
 
