@@ -1,4 +1,4 @@
-# Use Node.js 20 base image
+# Use official Node.js 20 image as base
 FROM node:20
 
 # Install Ghostscript and Poppler (required for compress & convert)
@@ -9,17 +9,17 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json (if present)
 COPY package*.json ./
 
 # Install Node.js dependencies
 RUN npm install
 
-# Copy all backend files
+# Copy all backend source files
 COPY . .
 
-# Expose port Railway uses (default 5000)
+# Expose port 5000 (must match your Express server)
 EXPOSE 5000
 
-# Start the backend
+# Start the server
 CMD ["node", "server.js"]
