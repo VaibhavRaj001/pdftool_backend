@@ -14,6 +14,8 @@ const app = express();
 const upload = multer(); // store files in memory
 app.use(express.json());
 
+const PORT = process.env.PORT || 5000;
+
 app.use(cors({
   origin: "http://localhost:8080", // Replace with your frontend URL
   methods: ["GET", "POST"],
@@ -157,6 +159,9 @@ app.get("/ping", (req, res) => {
 });
 
 
-app.listen(5000, () =>
-  console.log("PDF MVP API running on http://localhost:5000")
+
+
+app.listen(PORT, () =>
+  console.log(`PDF MVP API running on http://localhost:${PORT}`)
 );
+
